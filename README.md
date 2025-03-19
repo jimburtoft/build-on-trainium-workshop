@@ -35,6 +35,12 @@ If you are participating in an instructor-led workshop hosted in an AWS-managed 
 
 At the time of writing, this workshop uses a trn1.2xlarge instance with an on-demand hourly rate in supported US regions of $1.34 per hour.
 
+## FAQ's and known issues
+1. Workshop instructions are available [here](https://catalog.us-east-1.prod.workshops.aws/workshops/bf9d80a3-5e4b-4648-bca8-1d887bb2a9ca/en-US).
+2. If you use the `NousResearch` Llama 3.2 1B, please note you'll need to remove a trailing comma in the model config file. You can do this by simply opening the file in VS Code. If you do not take this step, you'll get an error for invalid JSON in trying to read the model config in Lab 1.
+3. Jupyter kernels can hold on to the NeuronCores as a Python process even after your cell has completed. This can then cause issues when you try to run a new notebook, and sometimes when you try to run another cell. If you encounter a `NeuronCore not found` or similar error statement, please just restart your Jupyter kernel and/or shut down kernels from previous sessions. You can also restart the instance through the EC2 console. Once your node is back online, you can always check the availability of the NeuronCores with `neuron-ls`.
+
+
 ## Security
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
