@@ -142,6 +142,7 @@ def convert_state_dict_to_fused_qkv(Qwen2_state_dict, cfg: InferenceConfig):
 
 class Qwen2InferenceConfig(InferenceConfig):
     def add_derived_config(self):
+        self.neuron_config.attn_cls = "NeuronQwen2Attention" 
         self.num_cores_per_group = 1
         if self.neuron_config.flash_decoding_enabled:
             num_attn_heads, num_kv_heads = self.num_attention_heads, self.num_key_value_heads
