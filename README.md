@@ -2,7 +2,7 @@
 
 In this workshop you will learn how to develop support for a new model with [NeuronX Distributed Inference](https://awsdocs-neuron.readthedocs-hosted.com/en/latest/libraries/nxd-inference/nxdi-overview.html#nxdi-overview), through the context of Llama 3.2 1B. You will also learn how to write your own kernel to directly program the accelerated hardware with the [Neuron Kernel Interface](https://awsdocs-neuron.readthedocs-hosted.com/en/latest/general/nki/index.html). Both of these tools will help you design your research proposals and experiments on Trainium.
 
-It also includes an example of fine tuning a supported model.
+It also includes an end-to-end example of using Hugging Face Optimum Neuron to fine-tune and host a small language model with Amazon SageMaker.
 
 ### What is Build on Trainium? 
 Build on Trainium is a $110M credit program focused on AI research and university education to support the next generation of innovation and development on AWS Trainium. AWS Trainium chips are purpose-built for high-performance deep learning (DL) training of generative AI models, including large language models (LLMs) and latent diffusion models. Build on Trainium provides compute credits to novel AI research on Trainium, investing in leading academic teams to build innovations in critical areas including new model architectures, ML libraries, optimizations, large-scale distributed systems, and more. This multi-year initiative lays the foundation for the future of AI by inspiring the academic community to utilize, invest in, and contribute to the open-source community around Trainium. Combining these benefits with Neuron software development kit (SDK) and recent launch of the Neuron Kernel Interface (NKI), AI researchers can innovate at scale in the cloud.
@@ -19,7 +19,7 @@ The workshop has multiple available modules:
 1. Set up instructions
 2. Run inference with Llama and NeuronX Distributed inference (NxD)
 3. Write your own kernel with Neuron Kernel Interface (NKI)
-4. Fine tune an existing, supported model with a different data set.
+4. Fine tune and host an existing, supported model with a different data set using SageMaker.
 
 #### Instructor-led workshop
 If you are participating in an instructor-led workshop, follow the guidance provided by your instructor for accessing the environment.
