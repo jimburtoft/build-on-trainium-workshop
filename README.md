@@ -1,19 +1,17 @@
-# Build On Trainium Workshop
+# Neuon Workshop
 
 In this workshop you will learn how to develop support for a new model with [NeuronX Distributed Inference](https://awsdocs-neuron.readthedocs-hosted.com/en/latest/libraries/nxd-inference/nxdi-overview.html#nxdi-overview), through the context of Llama 3.2 1B. You will also learn how to write your own kernel to directly program the accelerated hardware with the [Neuron Kernel Interface](https://awsdocs-neuron.readthedocs-hosted.com/en/latest/general/nki/index.html). Both of these tools will help you design your research proposals and experiments on Trainium.
 
 It also includes an end-to-end example of using Hugging Face Optimum Neuron to fine-tune and host a small language model with Amazon SageMaker.
 
-### What is Build on Trainium? 
-Build on Trainium is a $110M credit program focused on AI research and university education to support the next generation of innovation and development on AWS Trainium. AWS Trainium chips are purpose-built for high-performance deep learning (DL) training of generative AI models, including large language models (LLMs) and latent diffusion models. Build on Trainium provides compute credits to novel AI research on Trainium, investing in leading academic teams to build innovations in critical areas including new model architectures, ML libraries, optimizations, large-scale distributed systems, and more. This multi-year initiative lays the foundation for the future of AI by inspiring the academic community to utilize, invest in, and contribute to the open-source community around Trainium. Combining these benefits with Neuron software development kit (SDK) and recent launch of the Neuron Kernel Interface (NKI), AI researchers can innovate at scale in the cloud.
 
 ### What are AWS Trainium and Neuron?
 AWS Trainium is an AI chip developed by AWS for accelerating building and deploying machine learning models. Built on a specialized architecture designed for deep learning, Trainium accelerates the training and inference of complex models with high output and scalability, making it ideal for academic researchers looking to optimize performance and costs. This architecture also emphasizes sustainability through energy-efficient design, reducing environmental impact. Amazon has established a dedicated Trainium research cluster featuring up to 40,000 Trainium chips, accessible via Amazon EC2 Trn1 instances. These instances are connected through a non-blocking, petabit-scale network using Amazon EC2 UltraClusters, enabling seamless high-performance ML training. The Trn1 instance family is optimized to deliver substantial compute power for cutting-edge AI research and development. This unique offering not only enhances the efficiency and affordability of model training but also presents academic researchers with opportunities to publish new papers on underrepresented compute architectures, thus advancing the field.
 
-Learn more about Build On Trainium [here](https://aws.amazon.com/ai/machine-learning/trainium/research/).
+Learn more about Trainium [here](https://aws.amazon.com/ai/machine-learning/trainium/).
 
 ### Your workshop
-This hands-on workshop is designed for academic researchers who are planning on submitting proposals to [Build On Trainium](https://www.amazon.science/research-awards/call-for-proposals). 
+This hands-on workshop is designed for developers, data scientists, and machine learning engineers who are getting started in their journey on the Neuron SDK. 
 
 The workshop has multiple available modules:
 1. Set up instructions
