@@ -8,6 +8,9 @@ from transformers import (
 )
 import os
 import subprocess
+import boto3
+from botocore.exceptions import ClientError
+from huggingface_hub import login
 
 from optimum.neuron import NeuronHfArgumentParser as HfArgumentParser
 from optimum.neuron import NeuronSFTConfig, NeuronSFTTrainer, NeuronTrainingArguments
@@ -120,12 +123,54 @@ class ScriptArguments:
         default=0.05,
         metadata={"help": "LoRA dropout value to be used during fine-tuning."},
     )
+    hub_token: str = field(
+        default=None,
+        metadata={"help": "Hugging Face Hub token for accessing gated models and datasets."},
+    )
+    secret_name: str = field(
+        default="huggingface/token",
+        metadata={"help": "AWS Secrets Manager secret name containing Hugging Face token."},
+    )
+    secret_region: str = field(
+        default="us-east-1",
+        metadata={"help": "AWS region where the secret is stored."},
+    )
 
+
+def get_secret(secret_name, region_name):
+    """
+    Retrieve a secret from AWS Secrets Manager
+    """
+    try:
+        session = boto3.session.Session()
+        client = session.client(service_name='secretsmanager', region_name=region_name)
+        response = client.get_secret_value(SecretId=secret_name)
+        if 'SecretString' in response:
+            return response['SecretString']
+        return None
+    except ClientError:
+        print("Could not retrieve secret from AWS Secrets Manager")
+        return None
 
 if __name__ == "__main__":
     parser = HfArgumentParser([ScriptArguments, NeuronTrainingArguments])
     script_args, training_args = parser.parse_args_into_dataclasses()
-
+    
+    # Handle Hugging Face authentication
+    hf_token = script_args.hub_token
+    
+    # If no token provided, try to get it from AWS Secrets Manager
+    if hf_token is None:
+        print("No Hugging Face token provided, checking AWS Secrets Manager...")
+        hf_token = get_secret(script_args.secret_name, script_args.secret_region)
+    
+    # Login to Hugging Face if we have a valid token
+    if hf_token:
+        print("Logging in to Hugging Face Hub...")
+        login(token=hf_token)
+    else:
+        print("No valid Hugging Face token found, continuing without authentication")
+    
     set_seed(training_args.seed)
     training_function(script_args, training_args)
 
