@@ -1,6 +1,7 @@
-# Neuon Workshops
+# Neuron Workshops
+=======
 
-In this workshop you will learn how to develop support for a new model with [NeuronX Distributed Inference](https://awsdocs-neuron.readthedocs-hosted.com/en/latest/libraries/nxd-inference/nxdi-overview.html#nxdi-overview), through the context of Llama 3.2 1B. You will also learn how to write your own kernel to directly program the accelerated hardware with the [Neuron Kernel Interface](https://awsdocs-neuron.readthedocs-hosted.com/en/latest/general/nki/index.html). Both of these tools will help you design your research proposals and experiments on Trainium.
+In this workshop you will learn how to develop support for a new model with [NeuronX Distributed Inference](https://awsdocs-neuron.readthedocs-hosted.com/en/latest/libraries/nxd-inference/nxdi-overview.html#nxdi-overview), through the context of Llama 3.2 1B. You will also learn how to write your own kernel to directly program the accelerated hardware with the [Neuron Kernel Interface](https://awsdocs-neuron.readthedocs-hosted.com/en/latest/general/nki/index.html). These tools will help you design your research proposals and experiments on Trainium.
 
 It also includes an end-to-end example of using Hugging Face Optimum Neuron to fine-tune and host a small language model with Amazon SageMaker.
 
@@ -29,12 +30,12 @@ If you are following the workshop steps in your own environment, you will need t
 3. Set up and manage your own development environment on that instance, such as by using VSCode or a Jupyter Lab server.
 
 ### Background knowledge
-This workshop introduces developing on AWS Trainium for the academic AI research audience. As such it's expected that the audience will already have a firm understanding of machine learning fundamentals. 
+This workshop introduces developing on AWS Trainium for the academic AI research audience and technical innovators. As such it's expected that the audience will already have a firm understanding of machine learning fundamentals. 
 
 ### Workshop costs
 If you are participating in an instructor-led workshop hosted in an AWS-managed Workshop Studio environment, you will not incur any costs through using this environment. If you are following this workshop in your own environment, then you will incur associated costs with provisioning an Amazon EC2 instance. Please see the service pricing details [here](https://aws.amazon.com/ec2/pricing/on-demand/). 
 
-At the time of writing, this workshop uses a trn1.2xlarge instance with an on-demand hourly rate in supported US regions of $1.34 per hour. The fine tuning workshop requires less than an hour of ml.trn1.2xlarge at $1.54 an hour, and an ml.inf2.xlarge at $.99 an hour (you deploy it and **delete it when you are done**)
+At the time of writing, this workshop uses a trn1.2xlarge instance with an on-demand hourly rate in supported US regions of $1.34 per hour. The fine tuning workshop requires less than an hour of ml.trn1.2xlarge at $1.54 an hour, and an ml.inf2.xlarge at $.99 an hour (As long as after you deploy it you **delete it when you are done**)
 
 ## FAQ's and known issues
 1. Workshop instructions are available [here](https://catalog.us-east-1.prod.workshops.aws/workshops/bf9d80a3-5e4b-4648-bca8-1d887bb2a9ca/en-US).
