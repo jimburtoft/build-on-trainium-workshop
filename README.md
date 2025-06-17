@@ -34,7 +34,7 @@ This workshop introduces developing on AWS Trainium for the academic AI research
 ### Workshop costs
 If you are participating in an instructor-led workshop hosted in an AWS-managed Workshop Studio environment, you will not incur any costs through using this environment. If you are following this workshop in your own environment, then you will incur associated costs with provisioning an Amazon EC2 instance. Please see the service pricing details [here](https://aws.amazon.com/ec2/pricing/on-demand/). 
 
-At the time of writing, this workshop uses a trn1.2xlarge instance with an on-demand hourly rate in supported US regions of $1.34 per hour. The fine tuning workshop requires less than an hour of ml.trn1.2xlarge at $1.54 an hour, and an ml.inf2.xlarge at $.99 an hour (As long as after you deploy it you **delete it when you are done**)
+At the time of writing, this workshop uses a trn1.2xlarge instance with an on-demand hourly rate in supported US regions of $1.34 per hour. The fine tuning workshop requires less than an hour of ml.trn1.2xlarge at $1.54 per hour, and an ml.inf2.xlarge at $0.99 per hour. Please ensure you delete the resources when you are finished.
 
 ## FAQ's and known issues
 1. Workshop instructions are available [here](https://catalog.us-east-1.prod.workshops.aws/workshops/bf9d80a3-5e4b-4648-bca8-1d887bb2a9ca/en-US).
