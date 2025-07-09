@@ -8,6 +8,9 @@ from transformers import (
 )
 import os
 import subprocess
+import boto3
+from botocore.exceptions import ClientError
+from huggingface_hub import login
 
 from optimum.neuron import NeuronHfArgumentParser as HfArgumentParser
 from optimum.neuron import NeuronSFTConfig, NeuronSFTTrainer, NeuronTrainingArguments
@@ -120,12 +123,56 @@ class ScriptArguments:
         default=0.05,
         metadata={"help": "LoRA dropout value to be used during fine-tuning."},
     )
+    secret_name: str = field(
+        default="huggingface/token",
+        metadata={"help": "AWS Secrets Manager secret name containing Hugging Face token."},
+    )
+    secret_region: str = field(
+        default="us-west-2",
+        metadata={"help": "AWS region where the secret is stored."},
+    )
 
+
+def get_secret(secret_name, region_name):
+    """
+    Retrieve a secret from AWS Secrets Manager by searching for secrets with the given name prefix
+    """
+    try:
+        session = boto3.session.Session()
+        client = session.client(service_name='secretsmanager', region_name=region_name)
+        
+        # List secrets and find one that starts with the secret_name
+        paginator = client.get_paginator('list_secrets')
+        for page in paginator.paginate():
+            for secret in page['SecretList']:
+                if secret['Name'].startswith(secret_name):
+                    response = client.get_secret_value(SecretId=secret['ARN'])
+                    if 'SecretString' in response:
+                        return response['SecretString']
+        return None
+    except ClientError:
+        print("Could not retrieve secret from AWS Secrets Manager")
+        return None
 
 if __name__ == "__main__":
     parser = HfArgumentParser([ScriptArguments, NeuronTrainingArguments])
     script_args, training_args = parser.parse_args_into_dataclasses()
-
+    
+    # Check for Hugging Face token in environment variable
+    hf_token = os.environ.get("HF_TOKEN")
+    
+    # If no token in environment, try to get it from AWS Secrets Manager
+    if not hf_token:
+        print("No Hugging Face token found in environment, checking AWS Secrets Manager...")
+        hf_token = get_secret(script_args.secret_name, script_args.secret_region)
+    
+    # Login to Hugging Face if a valid token is found
+    if hf_token:
+        print("Logging in to Hugging Face Hub...")
+        login(token=hf_token)
+    else:
+        print("No valid Hugging Face token found, continuing without authentication")
+    
     set_seed(training_args.seed)
     training_function(script_args, training_args)
 
