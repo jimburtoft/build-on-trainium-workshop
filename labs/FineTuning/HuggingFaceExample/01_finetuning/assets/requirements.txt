@@ -2,3 +2,4 @@ optimum-neuron==0.0.27
 peft==0.14.0
 trl==0.11.4
 huggingface_hub==0.32.4
+datasets==3.6.0
