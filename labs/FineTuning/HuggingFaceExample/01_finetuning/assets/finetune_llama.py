@@ -2,7 +2,6 @@ from dataclasses import dataclass, field
 from datasets import load_dataset
 from peft import LoraConfig
 from transformers import (
-    AutoModelForCausalLM,
     AutoTokenizer,
     set_seed,
 )
@@ -11,11 +10,13 @@ import subprocess
 import boto3
 from botocore.exceptions import ClientError
 from huggingface_hub import login
+import torch
 
 from optimum.neuron import NeuronHfArgumentParser as HfArgumentParser
 from optimum.neuron import NeuronSFTConfig, NeuronSFTTrainer, NeuronTrainingArguments
-from optimum.neuron.distributed import lazy_load_for_parallelism
 from torch_xla.core.xla_model import is_master_ordinal
+from optimum.neuron.models.training import NeuronModelForCausalLM
+
 
 
 def training_function(script_args, training_args):
@@ -51,10 +52,15 @@ def training_function(script_args, training_args):
     # tokenizer.pad_token = tokenizer.eos_token
     # tokenizer.eos_token_id = 128001
 
-    with lazy_load_for_parallelism(
-        tensor_parallel_size=training_args.tensor_parallel_size
-    ):
-        model = AutoModelForCausalLM.from_pretrained(script_args.model_id)
+    trn_config = training_args.trn_config
+    dtype = torch.bfloat16 if training_args.bf16 else torch.float32
+    model = NeuronModelForCausalLM.from_pretrained(
+        script_args.model_id,
+        trn_config,
+        torch_dtype=dtype,
+        # Use FlashAttention2 for better performance and to be able to use larger sequence lengths.
+        use_flash_attention_2=False, #Because we are training a sequence lower than 2K for the workshop
+    )
 
     config = LoraConfig(
         r=script_args.lora_r,
@@ -135,7 +141,8 @@ class ScriptArguments:
 
 def get_secret(secret_name, region_name):
     """
-    Retrieve a secret from AWS Secrets Manager by searching for secrets with the given name prefix
+    Retrieve a secret from AWS Secrets Manager by searching for secrets with the given name prefix.  
+    This is specific to the workshop environment.
     """
     try:
         session = boto3.session.Session()

@@ -1,4 +1,4 @@
-from optimum.neuron.distributed.checkpointing import (
+from optimum.neuron.models.training import (
     consolidate_model_parallel_checkpoints_to_unified_checkpoint,
 )
 from transformers import AutoModel, AutoTokenizer
@@ -30,7 +30,7 @@ consolidate_model_parallel_checkpoints_to_unified_checkpoint(
     args.input_dir, consolidated_ckpt_dir
 )
 copyfile(
-    os.path.join(args.input_dir, "adapter_config.json"),
+    os.path.join(args.input_dir, "adapter_default/adapter_config.json"),
     os.path.join(consolidated_ckpt_dir, "adapter_config.json"),
 )
 
