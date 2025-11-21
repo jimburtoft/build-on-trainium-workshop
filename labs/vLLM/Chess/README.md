@@ -268,4 +268,4 @@ If versions are too old, see [Neuron SDK Installation Guide](https://awsdocs-neu
 4. Fine-tune your model further based on tournament results
 5. Deploy to production with learned configurations
 
-Happy chess playing! 🎮♟️
+
