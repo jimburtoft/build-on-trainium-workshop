@@ -6,8 +6,8 @@ from typing import Any, Dict, List, Optional, Tuple
 import chess
 import chess.engine
 
-from agents import ChessAgent
-from chess_renderer import RICH_AVAILABLE, ChessRenderer
+from .agents import ChessAgent
+from .chess_renderer import RICH_AVAILABLE, ChessRenderer
 
 
 class ChessEnvironment:

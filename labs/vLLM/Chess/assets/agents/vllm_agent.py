@@ -87,7 +87,7 @@ Do NOT include any explanation, commentary, or additional text before or after t
         Initialize the vLLM agent.
         
         Args:
-            base_url: vLLM server URL. If None, uses VLLM_BASE_URL env var or http://localhost:8000/v1
+            base_url: vLLM server URL. If None, uses VLLM_BASE_URL env var or http://localhost:8080/v1
             model: Model name (matches what vLLM is serving). If None, uses VLLM_MODEL env var or "Qwen3-chess"
             prompt_template: Custom prompt template with placeholders. If None, uses default.
             temperature: Generation temperature (0.0 = deterministic, 1.0 = random)
@@ -100,7 +100,7 @@ Do NOT include any explanation, commentary, or additional text before or after t
         """
         # Set up vLLM client (OpenAI-compatible)
         # vLLM doesn't require an API key, but the OpenAI client requires one
-        self.base_url = base_url or os.environ.get("VLLM_BASE_URL", "http://localhost:8000/v1")
+        self.base_url = base_url or os.environ.get("VLLM_BASE_URL", "http://localhost:8080/v1")
         self.api_key = "not-needed"  # vLLM ignores this, but OpenAI client requires it
         
         self.client = openai.OpenAI(

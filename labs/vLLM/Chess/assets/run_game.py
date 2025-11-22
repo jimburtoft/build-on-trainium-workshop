@@ -53,8 +53,8 @@ from rich.live import Live
 from rich.panel import Panel
 from rich.table import Table
 
-from agents import StockfishAgent, VLLMAgent
-from env import ChessEnvironment
+from .agents import StockfishAgent, VLLMAgent
+from .env import ChessEnvironment
 
 # Load environment variables from .env file
 load_dotenv()

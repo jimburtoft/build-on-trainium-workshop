@@ -18,7 +18,7 @@ Learn how to:
 
 2. **Hardware Requirements**:
    - AWS Trainium instance (trn1.2xlarge or larger)
-   - Neuron SDK 2.20+ (included in Workshop Studio / Neuron DLAMI)
+   - Neuron SDK 2.25 (included in Workshop Studio / Neuron DLAMI)
 
 3. **Software Requirements**:
    - Python 3.10+
@@ -54,6 +54,9 @@ Learn how to:
 ```bash
 # Navigate to lab directory
 cd /home/ubuntu/environment/neuron-workshops/labs/vLLM/Chess
+
+#install stockfish
+sudo apt install stockfish
 
 # Install dependencies
 pip install -r assets/requirements.txt
@@ -247,8 +250,7 @@ print(f"optimum-neuron: {get_version('optimum-neuron')}")
 ```
 
 **Minimum versions:**
-- `neuronx-cc`: 2.15+
-- `torch-neuronx`: 2.1+
+- `neuronx-cc`: 2.21
 - `optimum-neuron`: 0.3.0+
 
 If versions are too old, see [Neuron SDK Installation Guide](https://awsdocs-neuron.readthedocs-hosted.com/en/latest/).
