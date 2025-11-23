@@ -59,7 +59,7 @@ cd /home/ubuntu/environment/neuron-workshops/labs/vLLM/Chess
 sudo apt install stockfish
 
 # Install dependencies
-pip install -r assets/requirements.txt
+pip install -r requirements.txt
 
 # Open deployment notebook
 jupyter notebook Chess-Deployment.ipynb
@@ -110,8 +110,8 @@ Chess/
 ├── README.md                           # This file
 ├── Chess-Deployment.ipynb              # Lab 1: Model deployment
 ├── Chess-Tournament.ipynb              # Lab 2: Tournament evaluation
+├── requirements.txt                    # Python dependencies
 └── assets/
-    ├── requirements.txt                # Python dependencies
     ├── env.example                     # Environment template
     ├── env.py                          # Chess game environment
     ├── chess_renderer.py               # Board visualization
