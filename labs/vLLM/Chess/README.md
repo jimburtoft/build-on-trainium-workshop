@@ -98,17 +98,6 @@ jupyter notebook Chess-Deployment.ipynb
    - Continuous batching automatically groups concurrent requests
    - When 4 games request moves simultaneously → 1.4x throughput improvement
 
-**Example:**
-```bash
-# Running 4 games in parallel automatically enables batching
-python assets/run_game.py \
-  --agent vllm \
-  --agent stockfish-skill5-depth10 \
-  --num-games 20 \
-  --parallelism 4 \
-  --output-dir tournament_results
-```
-
 **Performance:**
 - Single request: ~0.58s latency, 1.72 moves/sec
 - 4 concurrent requests: ~1.86s latency per request, 2.15 total moves/sec
@@ -138,38 +127,6 @@ Chess/
         ├── vllm.sh                     # Server startup script
         ├── compile_model.py           # Model compilation
         └── start_vllm_python.py       # Python server starter
-```
-
-## Common Use Cases
-
-### 1. Deploy a Custom Fine-Tuned Model
-
-If you fine-tuned your own model, update the model path in `vllm.sh`:
-
-```bash
-MODEL_PATH="/path/to/your/model"
-```
-
-Then recompile for Trainium:
-
-```bash
-cd assets/vllm-server
-python compile_model.py
-```
-
-### 2. Test Against Different Opponents
-
-The environment includes Stockfish baselines with configurable difficulty:
-
-```bash
-# Easy opponent (Stockfish skill level 1)
-python assets/run_game.py --agent1 vllm --agent2 stockfish-skill1-depth2 --num-games 5
-
-# Medium opponent (Stockfish skill level 5)
-python assets/run_game.py --agent1 vllm --agent2 stockfish-skill5-depth10 --num-games 5
-
-# Strong opponent (Stockfish skill level 10)
-python assets/run_game.py --agent1 vllm --agent2 stockfish-skill10-depth15 --num-games 5
 ```
 
 ### 3. Analyze Model Performance
@@ -226,28 +183,6 @@ cd assets/vllm-server && bash vllm.sh
 - Not using compiled model (check for `model.pt` file)
 - Wrong tensor parallelism setting (should match cores: tp=2 for trn1.2xlarge)
 - `max_num_seqs` mismatch with compiled batch_size
-
-### Version Compatibility Issues
-
-**Problem**: Import errors or runtime failures
-
-**Solution**: Verify Neuron SDK versions match requirements:
-
-```python
-import subprocess, sys
-
-def get_version(pkg):
-    result = subprocess.run([sys.executable, "-m", "pip", "show", pkg],
-                          capture_output=True, text=True)
-    for line in result.stdout.split('\n'):
-        if line.startswith('Version:'):
-            return line.split(':')[1].strip()
-    return "Not installed"
-
-print(f"neuronx-cc: {get_version('neuronx-cc')}")
-print(f"torch-neuronx: {get_version('torch-neuronx')}")
-print(f"optimum-neuron: {get_version('optimum-neuron')}")
-```
 
 **Minimum versions:**
 - `neuronx-cc`: 2.21

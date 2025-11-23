@@ -2,7 +2,7 @@
 set -e
 
 # 1) Use the HF model ID
-MODEL_ID="kunhunjon/ChessLM_Qwen3_Trainium_AWS_Format"
+MODEL_PATH="kunhunjon/ChessLM_Qwen3_Trainium_AWS_Format"
 
 # 2) Make sure we use NxD inference as the Neuron backend in vLLM
 export VLLM_NEURON_FRAMEWORK="neuronx-distributed-inference"
@@ -15,7 +15,7 @@ export VLLM_NEURON_FRAMEWORK="neuronx-distributed-inference"
 # export NEURON_COMPILED_ARTIFACTS="/home/ubuntu/neuron-compiled-artifacts/chess-qwen"
 
 VLLM_RPC_TIMEOUT=100000 python -m vllm.entrypoints.openai.api_server \
-  --model "$MODEL_ID" \
+  --model "$MODEL_PATH" \
   --device neuron \
   --tensor-parallel-size 2 \
   --max-model-len 2048 \
