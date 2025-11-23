@@ -61,8 +61,9 @@ sudo apt install stockfish
 # Install dependencies
 pip install -r requirements.txt
 
-# Open deployment notebook
+# Open and follow the deployment notebooks
 jupyter notebook Chess-Deployment.ipynb
+jupyter notebook Chess-Tournament.ipynb
 ```
 
 ## Architecture
