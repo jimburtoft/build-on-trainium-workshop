@@ -109,9 +109,9 @@ Do NOT include any explanation, commentary, or additional text before or after t
         )
         
         # Load configuration from environment variables if not provided
-        self.model = model or os.environ.get("VLLM_MODEL", "Qwen3-chess")
+        self.model = model or os.environ.get("VLLM_MODEL", "kunhunjon/ChessLM_Qwen3_Trainium_AWS_Format")
         self.temperature = temperature if temperature is not None else float(os.environ.get("VLLM_TEMPERATURE", "0.1"))
-        self.max_tokens = max_tokens or int(os.environ.get("VLLM_MAX_TOKENS", "50"))
+        self.max_tokens = max_tokens or int(os.environ.get("VLLM_MAX_TOKENS", "2048"))
         self.timeout = timeout or float(os.environ.get("VLLM_TIMEOUT", "30.0"))
         self.retry_attempts = retry_attempts
         self.retry_delay = retry_delay
